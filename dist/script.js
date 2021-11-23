@@ -139,6 +139,19 @@ class Slider {
       this.slideIndex = this.slides.length;
     }
 
+    try {
+      this.hanson.style.opacity = '0';
+
+      if (i === 3) {
+        setTimeout(() => {
+          this.hanson.classList.add('animated', 'slideInUp');
+          this.hanson.style.opacity = '1';
+        }, 3000);
+      } else {
+        this.hanson.classList.remove('animated', 'slideInUp');
+      }
+    } catch (err) {}
+
     this.hideSlide();
     this.slides[this.slideIndex - 1].classList.add('animated', 'fadeInDown');
     this.slides[this.slideIndex - 1].style.display = 'block';
@@ -149,6 +162,10 @@ class Slider {
   }
 
   render() {
+    try {
+      this.hanson = document.querySelector('.hanson');
+    } catch (err) {}
+
     this.showSlide(this.slideIndex);
     this.btns.forEach(item => {
       item.addEventListener('click', () => {
