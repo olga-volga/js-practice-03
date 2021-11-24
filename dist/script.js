@@ -96,12 +96,16 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/videoPlayer */ "./src/js/modules/videoPlayer.js");
+
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   const mainSlider = new _modules_slider__WEBPACK_IMPORTED_MODULE_0__["default"]('.next', '.page');
   mainSlider.render();
+  const videoplayer = new _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_1__["default"]('.showup .play', '.overlay');
+  videoplayer.init();
 });
 
 /***/ }),
@@ -177,6 +181,68 @@ class Slider {
         this.showSlide(this.slideIndex);
       });
     });
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/videoPlayer.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/videoPlayer.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return VideoPlayer; });
+class VideoPlayer {
+  constructor(playBtnsSelector, overlaySelector) {
+    this.playBtns = document.querySelectorAll(playBtnsSelector);
+    this.overlay = document.querySelector(overlaySelector);
+    this.close = this.overlay.querySelector('.close');
+  }
+
+  bindPlayBtn() {
+    this.playBtns.forEach(item => {
+      item.addEventListener('click', e => {
+        if (this.player) {
+          // or if (document.querySelector('iframe#frame'))
+          this.overlay.style.display = 'flex';
+        } else {
+          const itemUrl = item.getAttribute('data-url');
+          this.overlay.style.display = 'flex';
+          this.createPlayer(itemUrl);
+        }
+      });
+    });
+  }
+
+  bindCloseBtn() {
+    this.overlay.addEventListener('click', e => {
+      if (e.target == this.overlay || e.target == this.close) {
+        this.overlay.style.display = '';
+        this.player.stopVideo();
+      }
+    });
+  }
+
+  createPlayer(url) {
+    this.player = new YT.Player('frame', {
+      height: '100%',
+      width: '100%',
+      videoId: url
+    });
+  }
+
+  init() {
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    this.bindPlayBtn();
+    this.bindCloseBtn();
   }
 
 }
