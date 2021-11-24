@@ -1,9 +1,8 @@
-export default class Slider {
-	constructor(btnsSelector, slidesParentSelector) {
-		this.btns = document.querySelectorAll(btnsSelector);
-		this.slidesParent = document.querySelector(slidesParentSelector);
-		this.slides = this.slidesParent.children;
-		this.slideIndex = 1;
+import Slider from './slider';
+
+export default class SliderMain extends Slider {
+	constructor(btns, slidesParent) {
+		super(btns, slidesParent);
 	}
 	hideSlide() {
 		for (let i = 0; i < this.slides.length; i++) {
