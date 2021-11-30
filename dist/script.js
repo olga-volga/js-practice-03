@@ -98,6 +98,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider_slider_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/slider/slider-main */ "./src/js/modules/slider/slider-main.js");
 /* harmony import */ var _modules_slider_slider_mini__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider/slider-mini */ "./src/js/modules/slider/slider-mini.js");
 /* harmony import */ var _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/videoPlayer */ "./src/js/modules/videoPlayer.js");
+/* harmony import */ var _modules_difference__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/difference */ "./src/js/modules/difference.js");
+
 
 
 
@@ -135,7 +137,59 @@ window.addEventListener('DOMContentLoaded', () => {
   feedSlider.render();
   const videoplayer = new _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_2__["default"]('.showup .play', '.overlay');
   videoplayer.init();
+  const differenceOld = new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"]('.officerold', '.officer__card-item', '.plus');
+  differenceOld.render();
+  const differenceNew = new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"]('.officernew', '.officer__card-item', '.plus');
+  differenceNew.render();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/difference.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/difference.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Difference; });
+class Difference {
+  constructor(itemsParent, items, plusBtn) {
+    this.itemsParent = document.querySelector(itemsParent);
+    this.items = this.itemsParent.querySelectorAll(items);
+    this.plusBtn = plusBtn;
+    this.counter = 0;
+  }
+
+  hideItem() {
+    this.items.forEach((item, i, arr) => {
+      if (i !== arr.length - 1) {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  showItem() {
+    this.items[this.counter].classList.add('animated', 'fadeIn');
+    this.items[this.counter].style.display = 'flex';
+    this.counter++;
+    console.log(this.counter);
+
+    if (this.counter == this.items.length - 1) {
+      this.items[this.items.length - 1].remove();
+    }
+  }
+
+  render() {
+    this.hideItem();
+    this.itemsParent.querySelector(this.plusBtn).addEventListener('click', () => {
+      this.showItem();
+    });
+  }
+
+}
 
 /***/ }),
 
