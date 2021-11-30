@@ -12,19 +12,18 @@ export default class Difference {
 			}
 		});
 	}
-	showItem() {
-		this.items[this.counter].classList.add('animated', 'fadeIn');
-		this.items[this.counter].style.display = 'flex';
-		this.counter++;
-		console.log(this.counter);
-		if (this.counter == this.items.length - 1) {
-			this.items[this.items.length - 1].remove();
-		}
+	bindTrigger() {
+		this.itemsParent.querySelector(this.plusBtn).addEventListener('click', () => {
+			this.items[this.counter].classList.add('animated', 'fadeIn');
+			this.items[this.counter].style.display = 'flex';
+			this.counter++;
+			if (this.counter == this.items.length - 1) {
+				this.items[this.items.length - 1].remove();
+			}
+		});
 	}
 	render() {
 		this.hideItem();
-		this.itemsParent.querySelector(this.plusBtn).addEventListener('click', () => {
-			this.showItem();
-		});
+		this.bindTrigger();
 	}
 }
