@@ -2,6 +2,7 @@ import SliderMain from './modules/slider/slider-main';
 import SliderMini from './modules/slider/slider-mini';
 import VideoPlayer from './modules/videoPlayer';
 import Difference from './modules/difference';
+import Form from './modules/form';
 
 window.addEventListener('DOMContentLoaded', () => {
 	'use strict';
@@ -44,4 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	const differenceNew = new Difference('.officernew', '.officer__card-item', '.plus');
 	differenceNew.render();
+
+	const form = new Form('form');
+	form.render();
 });

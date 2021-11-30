@@ -99,6 +99,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider_slider_mini__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider/slider-mini */ "./src/js/modules/slider/slider-mini.js");
 /* harmony import */ var _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/videoPlayer */ "./src/js/modules/videoPlayer.js");
 /* harmony import */ var _modules_difference__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/difference */ "./src/js/modules/difference.js");
+/* harmony import */ var _modules_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/form */ "./src/js/modules/form.js");
+
 
 
 
@@ -141,6 +143,8 @@ window.addEventListener('DOMContentLoaded', () => {
   differenceOld.render();
   const differenceNew = new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"]('.officernew', '.officer__card-item', '.plus');
   differenceNew.render();
+  const form = new _modules_form__WEBPACK_IMPORTED_MODULE_4__["default"]('form');
+  form.render();
 });
 
 /***/ }),
@@ -186,6 +190,33 @@ class Difference {
   render() {
     this.hideItem();
     this.bindTrigger();
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/form.js":
+/*!********************************!*\
+  !*** ./src/js/modules/form.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Form; });
+class Form {
+  constructor(forms) {
+    this.forms = document.querySelectorAll(forms);
+  }
+
+  render() {
+    this.forms.forEach(item => {
+      item.addEventListener('submit', e => {
+        e.preventDefault();
+      });
+    });
   }
 
 }
