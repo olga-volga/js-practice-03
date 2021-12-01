@@ -46,6 +46,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	const differenceNew = new Difference('.officernew', '.officer__card-item', '.plus');
 	differenceNew.render();
 
-	const form = new Form('form', '[name="email"]');
+	const form = new Form('form', '[name="email"]', '[name="phone"]');
 	form.render();
 });
