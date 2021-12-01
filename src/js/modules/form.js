@@ -1,6 +1,7 @@
 export default class Form {
-	constructor(forms) {
+	constructor(forms, emails) {
 		this.forms = document.querySelectorAll(forms);
+		this.emails = document.querySelectorAll(emails);
 	}
 	async postData(url, data) {
 		let result = await fetch(url, {
@@ -8,6 +9,13 @@ export default class Form {
 			body: data
 		});
 		return await result.text();
+	}
+	checkEmailInput() {
+		this.emails.forEach(item => {
+			item.addEventListener('input', () => {
+				item.value = item.value.replace(/[^a-z 0-9 @ _ . -]/gi, '');
+			});
+		});
 	}
 	render() {
 		this.forms.forEach(item => {
@@ -44,5 +52,6 @@ export default class Form {
 					})
 			});
 		});
+		this.checkEmailInput();
 	}
 }
