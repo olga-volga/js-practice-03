@@ -64,13 +64,13 @@ export default class Form {
 		this.forms.forEach(form => {
 			form.querySelector('button').disabled = true;
 
-			this.inputs.forEach((input) => {
-			    input.addEventListener('blur', () => {
-			      	if (input.value.trim() === '') {
-			          	input.style.border = '1px solid red';
+			this.inputs.forEach(item => {
+			    item.addEventListener('blur', () => {
+			      	if (item.value.trim() === '') {
+			          	item.style.border = '1px solid red';
 			          	form.querySelector('button').disabled = true;
 			        } else {
-			          	input.style.border = '';
+			          	item.style.border = '';
 			          	form.querySelector('button').removeAttribute('disabled');
 			        }
 			    });
@@ -116,6 +116,9 @@ export default class Form {
 					.finally(() => {
 						item.reset();
 						this.blockSubmitBtn();
+						this.inputs.forEach(input => {
+							input.style.border = '';
+						});
 						setTimeout(() => {
 							statusMessage.remove();
 							item.classList.remove('animated', 'fadeOut');
