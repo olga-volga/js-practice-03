@@ -1,9 +1,11 @@
 export default class Difference {
 	constructor(itemsParent, items, plusBtn) {
-		this.itemsParent = document.querySelector(itemsParent);
-		this.items = this.itemsParent.querySelectorAll(items);
-		this.plusBtn = plusBtn;
-		this.counter = 0;
+		try {
+			this.itemsParent = document.querySelector(itemsParent);
+			this.items = this.itemsParent.querySelectorAll(items);
+			this.plusBtn = plusBtn;
+			this.counter = 0;
+		} catch(err) {}
 	}
 	hideItem() {
 		this.items.forEach((item, i, arr) => {
@@ -23,7 +25,9 @@ export default class Difference {
 		});
 	}
 	render() {
-		this.hideItem();
-		this.bindTrigger();
+		try {
+			this.hideItem();
+			this.bindTrigger();
+		} catch(err) {}
 	}
 }

@@ -38,20 +38,22 @@ export default class SliderMain extends Slider {
 	}
 	render() {
 		try {
-			this.hanson = document.querySelector('.hanson');
+			try {
+				this.hanson = document.querySelector('.hanson');
+			} catch(err) {}
+
+			this.showSlide(this.slideIndex);
+
+			this.btns.forEach(item => {
+				item.addEventListener('click', () => {
+					this.changeIndex(1);
+				});
+				item.parentNode.previousElementSibling.addEventListener('click', (e) => {
+					e.preventDefault();
+					this.slideIndex = 1;
+					this.showSlide(this.slideIndex);
+				});
+			});
 		} catch(err) {}
-
-		this.showSlide(this.slideIndex);
-
-		this.btns.forEach(item => {
-			item.addEventListener('click', () => {
-				this.changeIndex(1);
-			});
-			item.parentNode.previousElementSibling.addEventListener('click', (e) => {
-				e.preventDefault();
-				this.slideIndex = 1;
-				this.showSlide(this.slideIndex);
-			});
-		});
 	}
 }

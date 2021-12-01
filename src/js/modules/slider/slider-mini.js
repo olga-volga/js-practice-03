@@ -50,27 +50,29 @@ export default class SliderMini extends Slider {
 		}, 5000);
 	}
 	render() {
-		this.slidesParent.style.cssText = `
-			display: flex;
-			flex-wrap: wrap;
-			align-items: flex-start;
-			overflow: hidden;
-		`;
+		try {
+			this.slidesParent.style.cssText = `
+				display: flex;
+				flex-wrap: wrap;
+				align-items: flex-start;
+				overflow: hidden;
+			`;
 
-		this.makeSlideActive();
-		this.bindTriggers();
+			this.makeSlideActive();
+			this.bindTriggers();
 
-		if (this.autoplay) {
-			this.autoplaySlider();
+			if (this.autoplay) {
+				this.autoplaySlider();
 
-			this.nextBtn.addEventListener('mouseenter', () => clearTimeout(this.timerId));
-			this.nextBtn.addEventListener('mouseleave', () => this.autoplaySlider());
+				this.nextBtn.addEventListener('mouseenter', () => clearTimeout(this.timerId));
+				this.nextBtn.addEventListener('mouseleave', () => this.autoplaySlider());
 
-			this.prevBtn.addEventListener('mouseenter', () => clearTimeout(this.timerId));
-			this.prevBtn.addEventListener('mouseleave', () => this.autoplaySlider());
+				this.prevBtn.addEventListener('mouseenter', () => clearTimeout(this.timerId));
+				this.prevBtn.addEventListener('mouseleave', () => this.autoplaySlider());
 
-			this.slidesParent.addEventListener('mouseenter', () => clearTimeout(this.timerId));
-			this.slidesParent.addEventListener('mouseleave', () => this.autoplaySlider());
-		}
+				this.slidesParent.addEventListener('mouseenter', () => clearTimeout(this.timerId));
+				this.slidesParent.addEventListener('mouseleave', () => this.autoplaySlider());
+			}
+		} catch(err) {}
 	}
 }

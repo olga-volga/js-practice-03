@@ -7,7 +7,7 @@ export default class Slider {
 		this.activeClass = activeClass;
 		this.effects = effects;
 		this.autoplay = autoplay;
-		this.slides = this.slidesParent.children;
+		try {this.slides = this.slidesParent.children;} catch(err) {}
 		this.slideIndex = 1;
 	}
 }

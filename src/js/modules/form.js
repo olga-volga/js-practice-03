@@ -3,7 +3,7 @@ export default class Form {
 		this.forms = document.querySelectorAll(forms);
 		this.inputs = document.querySelectorAll(inputs);
 		this.emails = document.querySelectorAll(emails);
-		this.phone = document.querySelector(phone);
+		try {this.phone = document.querySelector(phone);} catch(err) {}
 		this.message = {
 			load: 'Sending...',
 			success: 'Thanks! We will contact you as soon as possible.',
@@ -86,7 +86,7 @@ export default class Form {
 	}
 	render() {
 		this.checkEmailInput();
-		this.phoneMaskInit();
+		try {this.phoneMaskInit();} catch(err) {}
 		this.blockSubmitBtn();
 
 		this.forms.forEach(item => {
