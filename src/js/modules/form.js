@@ -1,6 +1,7 @@
 export default class Form {
-	constructor(forms, emails, phone) {
+	constructor(forms, inputs, emails, phone) {
 		this.forms = document.querySelectorAll(forms);
+		this.inputs = document.querySelectorAll(inputs);
 		this.emails = document.querySelectorAll(emails);
 		this.phone = document.querySelector(phone);
 		this.message = {
@@ -59,6 +60,23 @@ export default class Form {
 		this.phone.addEventListener('focus', createMask);
 		this.phone.addEventListener('blur', createMask);
 	}
+	blockSubmitBtn() {
+		this.forms.forEach(form => {
+			form.querySelector('button').disabled = true;
+
+			this.inputs.forEach((input) => {
+			    input.addEventListener('blur', () => {
+			      	if (input.value.trim() === '') {
+			          	input.style.border = '1px solid red';
+			          	form.querySelector('button').disabled = true;
+			        } else {
+			          	input.style.border = '';
+			          	form.querySelector('button').removeAttribute('disabled');
+			        }
+			    });
+		    });
+		});
+	}
 	async postData(url, data) {
 		let result = await fetch(url, {
 			method: "POST",
@@ -69,6 +87,7 @@ export default class Form {
 	render() {
 		this.checkEmailInput();
 		this.phoneMaskInit();
+		this.blockSubmitBtn();
 
 		this.forms.forEach(item => {
 			item.addEventListener('submit', (e) => {
@@ -96,6 +115,7 @@ export default class Form {
 					})
 					.finally(() => {
 						item.reset();
+						this.blockSubmitBtn();
 						setTimeout(() => {
 							statusMessage.remove();
 							item.classList.remove('animated', 'fadeOut');
