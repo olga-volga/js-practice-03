@@ -40,8 +40,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 	feedSlider.render();
 
-	const videoplayer = new VideoPlayer('.showup .play', '.overlay');
-	videoplayer.init();
+	new VideoPlayer('.showup .play', '.overlay').init();
+	new VideoPlayer('.module .play', '.overlay').init();
 
 	const differenceOld = new Difference('.officerold', '.officer__card-item', '.plus');
 	differenceOld.render();
