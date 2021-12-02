@@ -1,8 +1,8 @@
 import Slider from './slider';
 
 export default class SliderMain extends Slider {
-	constructor(btns, slidesParent) {
-		super(btns, slidesParent);
+	constructor(btns, slidesParent, nextBtn, prevBtn) {
+		super(btns, slidesParent, nextBtn, prevBtn);
 	}
 	hideSlide() {
 		for (let i = 0; i < this.slides.length; i++) {
@@ -36,24 +36,37 @@ export default class SliderMain extends Slider {
 	changeIndex(n) {
 		this.showSlide(this.slideIndex += n);
 	}
+	bindSmallTriggers(triggers, n) {
+		triggers.forEach(item => {
+			item.addEventListener('click', (e) => {
+				e.stopPropagation();
+				e.preventDefault();
+				this.changeIndex(n);
+			});
+		});
+	}
+	bindTriggers() {
+		this.btns.forEach(item => {
+			item.addEventListener('click', () => {
+				this.changeIndex(1);
+			});
+			item.parentNode.previousElementSibling.addEventListener('click', (e) => {
+				e.preventDefault();
+				this.slideIndex = 1;
+				this.showSlide(this.slideIndex);
+			});
+		});
+		this.bindSmallTriggers(this.nextBtn, 1);
+		this.bindSmallTriggers(this.prevBtn, -1);
+	}
 	render() {
-		try {
+		if (this.slidesParent) {
 			try {
 				this.hanson = document.querySelector('.hanson');
 			} catch(err) {}
 
 			this.showSlide(this.slideIndex);
-
-			this.btns.forEach(item => {
-				item.addEventListener('click', () => {
-					this.changeIndex(1);
-				});
-				item.parentNode.previousElementSibling.addEventListener('click', (e) => {
-					e.preventDefault();
-					this.slideIndex = 1;
-					this.showSlide(this.slideIndex);
-				});
-			});
-		} catch(err) {}
+			this.bindTriggers();
+		}
 	}
 }

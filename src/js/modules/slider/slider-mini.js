@@ -41,8 +41,8 @@ export default class SliderMini extends Slider {
 		}
 	}
 	bindTriggers() {
-		this.nextBtn.addEventListener('click', () => this.nextSlide());
-		this.prevBtn.addEventListener('click', () => this.previousSlide());
+		this.nextBtn[0].addEventListener('click', () => this.nextSlide());
+		this.prevBtn[0].addEventListener('click', () => this.previousSlide());
 	}
 	autoplaySlider() {
 		this.timerId = setInterval(() => {
@@ -64,11 +64,11 @@ export default class SliderMini extends Slider {
 			if (this.autoplay) {
 				this.autoplaySlider();
 
-				this.nextBtn.addEventListener('mouseenter', () => clearTimeout(this.timerId));
-				this.nextBtn.addEventListener('mouseleave', () => this.autoplaySlider());
+				this.nextBtn[0].addEventListener('mouseenter', () => clearTimeout(this.timerId));
+				this.nextBtn[0].addEventListener('mouseleave', () => this.autoplaySlider());
 
-				this.prevBtn.addEventListener('mouseenter', () => clearTimeout(this.timerId));
-				this.prevBtn.addEventListener('mouseleave', () => this.autoplaySlider());
+				this.prevBtn[0].addEventListener('mouseenter', () => clearTimeout(this.timerId));
+				this.prevBtn[0].addEventListener('mouseleave', () => this.autoplaySlider());
 
 				this.slidesParent.addEventListener('mouseenter', () => clearTimeout(this.timerId));
 				this.slidesParent.addEventListener('mouseleave', () => this.autoplaySlider());
