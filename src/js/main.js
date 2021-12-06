@@ -3,6 +3,7 @@ import SliderMini from './modules/slider/slider-mini';
 import VideoPlayer from './modules/videoPlayer';
 import Difference from './modules/difference';
 import Form from './modules/form';
+import Accordion from './modules/accordion';
 
 window.addEventListener('DOMContentLoaded', () => {
 	'use strict';
@@ -51,4 +52,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	const form = new Form('form', 'input', '[name="email"]', '[name="phone"]');
 	form.render();
+
+	const accordion = new Accordion('.plus__content');
+	accordion.render();
 });
