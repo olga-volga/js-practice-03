@@ -4,6 +4,7 @@ import VideoPlayer from './modules/videoPlayer';
 import Difference from './modules/difference';
 import Form from './modules/form';
 import Accordion from './modules/accordion';
+import Download from './modules/download';
 
 window.addEventListener('DOMContentLoaded', () => {
 	'use strict';
@@ -55,4 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	const accordion = new Accordion('.plus__content');
 	accordion.render();
+
+	const download = new Download('.download');
+	download.render();
 });
