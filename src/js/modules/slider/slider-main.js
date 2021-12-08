@@ -65,6 +65,11 @@ export default class SliderMain extends Slider {
 				this.hanson = document.querySelector('.hanson');
 			} catch(err) {}
 
+			if (this.slidesParent.classList.contains('moduleapp')) {
+				this.slideIndex = +document.location.hash.replace(/\D/ig, '');
+			} else {
+				this.slideIndex = this.slideIndex;
+			}
 			this.showSlide(this.slideIndex);
 			this.bindTriggers();
 		}
